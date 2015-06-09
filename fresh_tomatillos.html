@@ -1,0 +1,304 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatillos!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+        }
+        img {
+            -webkit-transition: opacity 0.2s linear;
+            -moz-transition: opacity 0.2s linear;
+            -ms-transition: opacity 0.2s linear;
+            -o-transition: opacity 0.2s linear;
+            transition: opacity 0.2s linear;
+        }
+        h3, h4, h5 {
+            text-align: left;
+        }
+        footer {
+            margin: 300px 0px 10px 0px;
+        }
+        #special-footer{
+            display: inline;
+            position: relative;
+            margin-left: 5px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+            position: relative;
+            overflow: hidden;
+            color:#000;
+            -webkit-transition: background 0.5s linear;
+            -moz-transition: background 0.5s linear;
+            -ms-transition: background 0.5s linear;
+            -o-transition: background 0.5s linear;
+            transition: background 0.5s linear;
+        }
+        .movie-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+        .movie-title{
+            position: relative;
+        }
+        .extra-info {
+            position: absolute;
+            height: 425px;
+            bottom: -425px;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+        
+        // Hide all extra-info when the page loads
+        $(document).ready(function () {
+          $('.extra-info').hide();
+          });
+        
+        // Show all extra info when the user hovers over the movie-tile
+        $(document).ready(function (){
+          $('.movie-tile').hover(
+            function() {
+              $(this).find('.movie-title').stop().animate({bottom: 300}, 350);
+              $(this).find('.extra-info').stop().animate({bottom: -100}, 350).show();
+              $(this).find('img').css({"opacity": "0.15"});
+            },
+            function(){
+              $(this).find('.movie-title').stop().animate({bottom: 0}, 350);
+              $(this).find('.extra-info').stop().animate({bottom: -425}, 350);
+              $(this).find('img').css({"opacity": "1"});
+            });
+          });
+
+        // Hide the footer on load, then show after the movie-tiles load
+        $(document).ready(function () {
+          $('.footer').hide().delay(1000).show("slow");
+          });
+    </script>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatillos! Movies favored by Kellen Proctor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="hEJnMQG9ev8" data-toggle="modal" data-target="#trailer">
+    <img src="http://d1oi7t5trwfj5d.cloudfront.net/0c/71/6a48f0b74b27b795f5c8ecca5f6a/mad-max-fury-road.jpg" width="220" height="342">
+    <h2 class="movie-title">Mad Max: Fury Road</h2>
+    <div class="extra-info">
+      <h3>Charlize Theron drives a Big Rig. So Shiny. So Chrome.</h3>
+      <h4>Release: 15 May 2015</h4>
+      <h4>Director: George Miller</h4>
+      <h4>Writer: George Miller</h4>
+      <h4>Producer: George Miller</h4>
+      <h4>Actors: Charlize Theron, Tom Hardy</h4>
+      <h5>Duration: 120 min</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="vwyZH85NQC4" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" width="220" height="342">
+    <h2 class="movie-title">Toy Story</h2>
+    <div class="extra-info">
+      <h3>A cowboy and a space ranger go on a crusade to liberate an alien     species from their captor (and deity), the Claw.</h3>
+      <h4>Release: 22 November 1995</h4>
+      <h4>Director: John Lasseter</h4>
+      <h4>Writer: John Lasseter</h4>
+      <h4>Producer: John Lasseter</h4>
+      <h4>Actors: Forrest Gump, and Tim from Home Improvement</h4>
+      <h5>Duration: 4860 secs</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="5PSNL1qE6VY" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/id/b/b0/Avatar-Teaser-Poster.jpg" width="220" height="342">
+    <h2 class="movie-title">Avatar</h2>
+    <div class="extra-info">
+      <h3>A marine on an alien planet.</h3>
+      <h4>Release: 18 December 2009</h4>
+      <h4>Director: James Cameron</h4>
+      <h4>Writer: James Cameron</h4>
+      <h4>Producer: James Cameron</h4>
+      <h4>Actors: Sigourney Weaver, Zoe Saldana, Sam Worthington</h4>
+      <h5>Duration: forever, but worth it</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="yh401Rmkq0o" data-toggle="modal" data-target="#trailer">
+    <img src="http://ibraheemyoussef.com/ibraheemshop/images/zissou.jpg" width="220" height="342">
+    <h2 class="movie-title">The Life Aquatic</h2>
+    <div class="extra-info">
+      <h3>A man goes on a quest to find the rare shark that ate his best friend...     then blow it up.</h3>
+      <h4>Release: 10 December 2004</h4>
+      <h4>Director: Wes Anderson</h4>
+      <h4>Writer: Wes Anderson</h4>
+      <h4>Producer: there's definitely a pattern here...</h4>
+      <h4>Actors: Bill Murray, Angelica Houston, Owen Wilson, Cate Blanchett,     and Dr. Ian Malcolm</h4>
+      <h5>Duration: 0.0826389 days</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="3PsUJFEBC74" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/en/1/11/School_of_Rock_Poster.jpg" width="220" height="342">
+    <h2 class="movie-title">School of Rock</h2>
+    <div class="extra-info">
+      <h3>A destitute rocker poses as a substitute teacher and convinces his     class to start a band.</h3>
+      <h4>Release: 3 October 2003</h4>
+      <h4>Director: Richard Linklater, really?</h4>
+      <h4>Writer: Jack White</h4>
+      <h4>Producer: Robert Plant and Jimmy Page (part of the contract for the rights to use     Immigrant Song (!True))</h4>
+      <h4>Actors: Jack Black. There are others, but he's all that matters here.</h4>
+      <h5>Duration: 109 min</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="c3sBBRxDAqk" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/en/5/50/RatatouillePoster.jpg" width="220" height="342">
+    <h2 class="movie-title">Ratatouille</h2>
+    <div class="extra-info">
+      <h3>In Paris, anyone can cook, and a rat with big dreams decides to     prove it.</h3>
+      <h4>Release: 29 June 2007</h4>
+      <h4>Director: Brad Bird</h4>
+      <h4>Writer: Brad Bird</h4>
+      <h4>Producer: Pinky, the Brain</h4>
+      <h4>Actors: Patton Oswalt, everyone else is an animator</h4>
+      <h5>Duration: 115 min</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="atLg2wqqXVu" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/en/9/9f/Midnight_in_Paris_Poster.jpg" width="220" height="342">
+    <h2 class="movie-title">Midnight In Paris</h2>
+    <div class="extra-info">
+      <h3>On his honeymoon, Owen Wilson time travels solo to crash parties     in Paris past. The highly anticipated sequel to Wedding Crashers.</h3>
+      <h4>Release: Decembre 1921</h4>
+      <h4>Director: Woody Allen</h4>
+      <h4>Writer: Woody Allen</h4>
+      <h4>Producer: Woody Allen?</h4>
+      <h4>Actors: Owen Wilson, Rachel McAdams</h4>
+      <h5>Duration: 100 min</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="PbA63a7H0bo" data-toggle="modal" data-target="#trailer">
+    <img src="http://upload.wikimedia.org/wikipedia/en/4/42/HungerGamesPoster.jpg" width="220" height="342">
+    <h2 class="movie-title">Hunger Games</h2>
+    <div class="extra-info">
+      <h3>A girl kills everyone...</h3>
+      <h4>Release: 23 March 2012</h4>
+      <h4>Director: Gary Ross</h4>
+      <h4>Writer: Suzanne Collins, annnd Gary Ross</h4>
+      <h4>Producer: Tywin Lannister</h4>
+      <h4>Actors: That Jennifer Lawrence, she's so hot right now.</h4>
+      <h5>Duration: 142 mins</h5>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="jg4OCeSTL08" data-toggle="modal" data-target="#trailer">
+    <img src="http://i1191.photobucket.com/albums/z471/posterocalypse/Posters%205/KilianEngDune.jpg" width="220" height="342">
+    <h2 class="movie-title">Dune</h2>
+    <div class="extra-info">
+      <h3>Drug Wars... In Space...</h3>
+      <h4>Release: Well, never.</h4>
+      <h4>Director: Alejandro Jodorowsky</h4>
+      <h4>Writer: Frank Herbert</h4>
+      <h4>Producer: Alejandro Jodorowsky</h4>
+      <h4>Actors: Sting? That scary overprotective dad from Agents of Shield?</h4>
+      <h5>Duration: NaN</h5>
+    </div>
+</div>
+
+    </div>
+    <footer class="footer footer-inverse">
+      <div class="container" height="280">
+        <h1>And Coming Soon... The Tyrion Collection!</h1>
+        <img src="http://images.social-first.net/files/epicstream/thunmggd.jpg" width="352" height="235" id="special-footer">
+        <img src="http://www.iceposter.com/thumbs/MOV_266d1761_b.jpg" width="156" height="235" id="special-footer">
+        <img src="http://moviexclusive.com/review/bottleshock/poster.jpg" id="special-footer" width="156" height="235">
+        <img src="http://i.movie.as/p/130721.jpg" id="special-footer" width="156" height="235">
+        <h1 style="display: inline;">AND MORE!!!</h1>
+      </div>
+    </footer>
+  </body>
+</html>
